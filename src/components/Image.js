@@ -1,5 +1,6 @@
 
 import React from "react";
+import { Form } from './Form'
 
 export const Image = ({ template, onClick }) => {
     return (
@@ -16,7 +17,7 @@ export const Image = ({ template, onClick }) => {
                 </div>
                 <div className="card-content">
                     <div className="content">
-                        form ?
+                        <Form />
                     </div>
                 </div>
             </div>
