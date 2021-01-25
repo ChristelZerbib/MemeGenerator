@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import api from '../api';
 
-const objectToQueryParam = obj => {
+const parameters = obj => {
     const params = Object.entries(obj).map(([key, value]) => `${key}=${value}`);
-    return "?" + params.join("&");
+    return params.join("&");
 };
 
-export const Form = ({idSelected, created}) => {
+export const Form = ({idSelected, listCreated}) => {
     const [topText, setTopText] = useState('');
     const [bottomText, setBottomText] = useState('');
-    const [createdMeme, setCreatedMeme] = useState(null);
+    const [createdMeme, setCreatedMeme] = useState('');
+
+    useEffect(()=>{
+        listCreated(createdMeme);
+    })
 
     return (
         <form className="field"
@@ -18,19 +22,27 @@ export const Form = ({idSelected, created}) => {
                   // add logic to create meme from api
                   const params = {
                       template_id: idSelected,
-                      text1: topText,
-                      text2: bottomText,
+                      text0: topText,
+                      text1: bottomText,
                       username: "czerbibmeme",
                       password: "L0vememe"
                   };
-                  const response = await fetch(
-                      api.defaults.baseURL + `${objectToQueryParam(
-                          params
-                      )}`
-                  );
-                  const json = await response.json();
-                  setCreatedMeme(json.data.url);
-                  created(createdMeme);
+
+                  const headers = {
+                      'content-type': 'application/x-www-form-urlencoded',
+                  };
+                  await api(
+                      {
+                          url: api.defaults.baseURL,
+                          method: 'POST',
+                          headers: headers,
+                          data: parameters(params)
+                      }
+                  ).then(function(response) {
+                      setCreatedMeme(response.data.data.url);
+                  }).catch(function (error) {
+                      console.log(error);
+                  });
               }}
         >
             <input className="input is-primary mb-2" type="text" placeholder="Text 1" name="text1" value={topText} onChange={e => setTopText(e.target.value)}/>

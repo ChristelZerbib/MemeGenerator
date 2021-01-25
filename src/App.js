@@ -14,6 +14,14 @@ function App() {
         setListmeme(state);
     }
 
+    function listCreated(listCreated){
+        // if(listCreated.length > 0) {
+            console.log("APP");
+            console.log(listCreated)
+        // }
+    }
+
+
   return (
     <div className="App container has-background-primary ">
         <h1 className="is-uppercase is-size-1 has-text-success-light pt-6 pb-5">Meme Generator</h1>
@@ -22,11 +30,13 @@ function App() {
                  {templates.map(template => {
                     return (
                         <Image
+                            key={template.id}
                             template={template}
                             result={result}
                             onClick={() => {
 
                             }}
+                            listCreated={listCreated}
                         />
                     );
                 })}
@@ -34,8 +44,8 @@ function App() {
 
             <div className="column is-one-fifths" style={{marginTop: 20}}>
 
-                {listMeme.map(fromForm => {
-                    return < Createdmeme fromForm={fromForm} />
+                {listMeme.map(listMeme => {
+                    return < Createdmeme listCreated={listCreated} />
                 })}
             </div>
         </div>
