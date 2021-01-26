@@ -15,7 +15,7 @@ export const Form = ({idSelected, onMemeCreation}) => {
 
     useEffect(()=>{
         onMemeCreation(createdMeme);
-    }, [createdMeme]);
+    }, [createdMeme, onMemeCreation]);
 
     return (
         <form className="field"
