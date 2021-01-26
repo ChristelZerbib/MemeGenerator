@@ -1,14 +1,18 @@
-# Changelog
+### Changelog
 
-<a name="0.1.0"></a>
-## 0.1.0 (2021-01-05)
+All notable changes to this project will be documented in this file. 
 
-### Added
+#### Added
 
-- 🎉 ajout des fichiers react au dépôt [[bf8b551](https://github.com/ChristelZerbib/MemeGenerator/commit/bf8b551fb770fc9a422a2fd3c2267f7eec9a3137)]
-
-### Miscellaneous
-
--  Initialize project using Create React App [[607a939](https://github.com/ChristelZerbib/MemeGenerator/commit/607a9394917fc6a74ac832f09dc115425e4b950b)]
-
-
+* :tada: ajout des fichiers react au dépôt
+* :hammer: add file to prepare test
+* :hammer: Creating a hook to connect to imgflip's API
+* :white_check_mark: adding image component tests
+* :lipstick: using bulma to make card
+* :white_check_mark: Add form test
+* :sparkles: create a form
+* :lipstick: add style for this form
+* :construction: making link with api to create meme
+* :construction: make the created meme come to app.js
+* :bug: debug why api didn't give response and bring url in a mapped array
+* :lipstick: add style to created memes
