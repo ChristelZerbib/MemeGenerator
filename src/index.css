@@ -16,4 +16,6 @@ code {
   width: 200px;
   display: inline-block;
   margin : 15px;
+  vertical-align: top;
 }
+

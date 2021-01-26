@@ -21,7 +21,7 @@ function App() {
         <div className="App container has-background-primary ">
             <h1 className="is-uppercase is-size-1 has-text-success-light pt-6 pb-5">Meme Generator</h1>
             <div className="columns">
-                <div className="column is-four-fifths">
+                <div className="column is-three-quarters">
                     {templates.map(template => {
                         return (
                             <Image
@@ -33,8 +33,8 @@ function App() {
                     })}
                 </div>
 
-                <div className="column is-one-fifths" style={{marginTop: 20}}>
-
+                <div className="column is-one-quarter" style={{marginTop: 20}}>
+                    <h2 className="is-uppercase is-size-4 has-text-success-light">Your Memes : </h2>
                     {listCreatedMemes.map(url => {
                         return (
                             < Createdmeme
