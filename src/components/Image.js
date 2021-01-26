@@ -1,27 +1,35 @@
-import React from "react";
+
+import React, { useState } from "react";
 import { Form } from './Form'
 
-export const Image = ({ template, onClick, listCreated }) => {
+export const Image = ({ template, onMemeCreation }) => {
+    const [showForm, setShowForm] = useState(false);
+
+    function toggleFormOnClick() {
+        setShowForm(!showForm);
+    }
+
     return (
         <div className="card is-one-quarter">
-            <div className="card-image">
+            <div className="card-image" onClick={toggleFormOnClick}>
                 <figure className="image is-4by3">
                     <img
                         key={template.id}
                         src={template.url}
                         alt={template.name}
-                        onClick={onClick}
                     />
                 </figure>
             </div>
+            { showForm &&
             <div className="card-content">
                 <div className="content">
                     <Form
                         idSelected = {template.id}
-                        listCreated = {listCreated}
+                        onMemeCreation = {onMemeCreation}
                     />
                 </div>
             </div>
+            }
         </div>
 
 

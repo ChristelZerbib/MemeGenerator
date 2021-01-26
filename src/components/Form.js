@@ -1,25 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useEffect } from 'react';
 import api from '../api';
 
-const parameters = obj => {
+const objectToQueryParam = obj => {
     const params = Object.entries(obj).map(([key, value]) => `${key}=${value}`);
     return params.join("&");
 };
 
-export const Form = ({idSelected, listCreated}) => {
+
+export const Form = ({idSelected, onMemeCreation}) => {
     const [topText, setTopText] = useState('');
     const [bottomText, setBottomText] = useState('');
-    const [createdMeme, setCreatedMeme] = useState('');
+    const [createdMeme, setCreatedMeme] = useState(null);
 
     useEffect(()=>{
-        listCreated(createdMeme);
-    })
+        onMemeCreation(createdMeme);
+    }, [createdMeme]);
 
     return (
         <form className="field"
               onSubmit={async e => {
                   e.preventDefault();
-                  // add logic to create meme from api
+
+                  // parameters needed by the api
                   const params = {
                       template_id: idSelected,
                       text0: topText,
@@ -28,19 +31,18 @@ export const Form = ({idSelected, listCreated}) => {
                       password: "L0vememe"
                   };
 
-                  const headers = {
-                      'content-type': 'application/x-www-form-urlencoded',
-                  };
-                  await api(
+                  // request
+                  const response = await api(
                       {
                           url: api.defaults.baseURL,
                           method: 'POST',
-                          headers: headers,
-                          data: parameters(params)
+                          data: objectToQueryParam(params)
                       }
                   ).then(function(response) {
+                      // if request ok
                       setCreatedMeme(response.data.data.url);
                   }).catch(function (error) {
+                      // if error catched
                       console.log(error);
                   });
               }}

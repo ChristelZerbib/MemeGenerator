@@ -1,20 +1,10 @@
 import React from 'react';
 
-export const Createdmeme = ({fromForm}) => {
+export const Createdmeme = ({url}) => {
 
-    if (fromForm) {
-        return (
-            <>
-                <div className="text-center" style={{paddingTop: 10}}>
-                    <img style={{ width: 200 }} src={fromForm} alt="created meme"/>
-                </div>
-            </>
-        )
-    }
-    else {
-        return (
-            <>
-            </>
-        )
-    }
+    return (
+        <div className="text-center" style={{paddingTop: 10}}>
+            <img style={{ width: 200 }} src={url} alt="created meme"/>
+        </div>
+    );
 };
