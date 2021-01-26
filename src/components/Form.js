@@ -32,7 +32,7 @@ export const Form = ({idSelected, onMemeCreation}) => {
                   };
 
                   // request
-                  const response = await api(
+                  await api(
                       {
                           url: api.defaults.baseURL,
                           method: 'POST',
