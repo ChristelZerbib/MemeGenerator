@@ -1,25 +1,53 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import './components/Image';
+import { Image } from "./components/Image";
+import { useTemplatesFromAPI } from "./hook/useTemplatesFromAPI";
+import { Createdmeme } from "./components/Createdmeme";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [templates] = useTemplatesFromAPI();
+    const [listCreatedMemes, setListCreatedMemes] = useState([]);
+
+    var addCreatedMeme = strUrl => {
+        if(strUrl) {
+            if(strUrl.length > 0 && listCreatedMemes.indexOf(strUrl) <= -1) {
+                setListCreatedMemes([strUrl, ...listCreatedMemes]);
+            }
+        }
+    }
+
+    return (
+        <div className="App container has-background-primary ">
+            <h1 className="is-uppercase is-size-1 has-text-success-light pt-6 pb-5">Meme Generator</h1>
+            <div className="columns">
+                <div className="column is-three-quarters">
+                    {templates.map(template => {
+                        return (
+                            <Image
+                                onMemeCreation = {addCreatedMeme}
+                                key={template.id}
+                                template={template}
+                            />
+                        );
+                    })}
+                </div>
+
+                <div className="column is-one-quarter" style={{marginTop: 20}}>
+                    <h2 className="is-uppercase is-size-4 has-text-success-light">Your Memes : </h2>
+                    {listCreatedMemes.map(url => {
+                        return (
+                            < Createdmeme
+                                key = {url}
+                                url = {url}
+                            />
+                        )
+                    })}
+                </div>
+            </div>
+
+        </div>
+    );
 }
 
 export default App;
